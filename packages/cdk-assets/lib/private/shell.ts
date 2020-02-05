@@ -47,14 +47,22 @@ export async function shell(command: string[], options: ShellOptions = {}): Prom
 
     child.once('error', reject);
 
-    child.once('exit', code => {
+    child.once('close', code => {
       if (code === 0) {
         resolve(Buffer.concat(stdout).toString('utf-8'));
       } else {
-        reject(new Error(`${renderCommandLine(command)} exited with error code ${code}`));
+        reject(new ProcessFailed(code, `${renderCommandLine(command)} exited with error code ${code}`));
       }
     });
   });
+}
+
+class ProcessFailed extends Error {
+  public readonly code = 'PROCESS_FAILED';
+
+  constructor(public readonly exitCode: number, message: string) {
+    super(message);
+  }
 }
 
 /**

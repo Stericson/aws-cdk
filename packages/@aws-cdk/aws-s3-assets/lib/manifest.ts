@@ -56,7 +56,7 @@ export class Manifest {
 
     expectKey(entry.source, 'path', 'string');
     expectKey(entry.source, 'packaging', 'string', true);
-    expectKey(entry.destination, 'region', 'string');
+    expectKey(entry.destination, 'region', 'string', true);
     expectKey(entry.destination, 'assumeRoleArn', 'string', true);
     expectKey(entry.destination, 'assumeRoleExternalId', 'string', true);
     expectKey(entry.destination, 'bucketName', 'string');

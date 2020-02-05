@@ -3,6 +3,7 @@ import * as path from 'path';
 import { IAws } from "../aws-operations";
 import { IAssetHandler, MessageSink } from "../private/asset-handler";
 import { Docker } from "../private/docker";
+import { replaceAwsPlaceholders } from "../private/placeholders";
 
 export class ContainerImageAssetHandler implements IAssetHandler {
   private readonly localTagName: string;
@@ -14,11 +15,11 @@ export class ContainerImageAssetHandler implements IAssetHandler {
     private readonly aws: IAws,
     private readonly message: MessageSink) {
 
-    this.localTagName = `cdkasset-${this.asset.id.assetId}`;
+    this.localTagName = `cdkasset-${this.asset.id.assetId.toLowerCase()}`;
   }
 
   public async publish(): Promise<void> {
-    const destination = this.asset.destination;
+    const destination = await replaceAwsPlaceholders(this.asset.destination, this.aws);
 
     const ecr = this.aws.ecrClient(destination);
 

@@ -25,6 +25,7 @@ export class Docker {
       await this.execute(['inspect', tag], { quiet: true });
       return true;
     } catch (e) {
+      if (e.code !== 'PROCESS_FAILED' || e.exitCode !== 1) { throw e; }
       return false;
     }
   }

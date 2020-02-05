@@ -1,7 +1,7 @@
 import { AssetManifest } from '@aws-cdk/assets';
 import * as mockfs from 'mock-fs';
 import { AssetPublishing } from '../lib';
-import { mockAws } from './mock-aws';
+import { mockAws, mockedApiFailure, mockedApiResult } from './mock-aws';
 
 let aws: ReturnType<typeof mockAws>;
 beforeEach(() => {
@@ -24,7 +24,8 @@ beforeEach(() => {
           },
         },
       },
-    })
+    }),
+    '/simple/cdk.out/some_file': 'FILE_CONTENTS',
   });
 
   aws = mockAws();
@@ -45,21 +46,31 @@ test('pass destination properties to AWS client', async () => {
   }));
 });
 
-test('Do nothing if file already exists', () => {
+test('Do nothing if file already exists', async () => {
   const pub = new AssetPublishing({ aws, manifest: AssetManifest.fromPath('/simple/cdk.out') });
+
+  aws.mockS3.headObject = mockedApiResult({ /* No error == file exists */ });
 
   await pub.publish();
 
-  expect(aws.s3Client).toHaveBeenCalledWith(expect.objectContaining({
-    region: 'us-north-50',
-    assumeRoleArn: 'arn:aws:role',
+  expect(aws.mockS3.headObject).toHaveBeenCalledWith(expect.objectContaining({
+    Bucket: 'some_bucket',
+    Key: 'some_key'
   }));
 });
 
-test('upload file if new', () => {
-  // ...
-});
+test('upload file if new', async () => {
+  const pub = new AssetPublishing({ aws, manifest: AssetManifest.fromPath('/simple/cdk.out') });
 
-test('zip directory', () => {
-  // ...
+  aws.mockS3.headObject = mockedApiFailure('NotFound', 'File does not exist');
+  aws.mockS3.putObject = mockedApiResult({});
+
+  await pub.publish();
+
+  expect(aws.mockS3.putObject).toHaveBeenCalledWith(expect.objectContaining({
+    Bucket: 'some_bucket',
+    Key: 'some_key'
+  }));
+
+  // We'll just have to assume the contents are correct
 });

@@ -49,7 +49,7 @@ export class Manifest {
       }
     }
 
-    expectKey(entry.destination, 'region', 'string');
+    expectKey(entry.destination, 'region', 'string', true);
     expectKey(entry.destination, 'assumeRoleArn', 'string', true);
     expectKey(entry.destination, 'assumeRoleExternalId', 'string', true);
     expectKey(entry.destination, 'repositoryName', 'string');

@@ -84,7 +84,7 @@ export class AssetPublishing implements IPublishProgress {
     }
 
     if ((this.options.throwOnError ?? true) && this.errors.length > 0) {
-      throw new Error(`Error publishing: ${this.errors}`);
+      throw new Error(`Error publishing: ${this.errors.map(e => e.message)}`);
     }
   }
 

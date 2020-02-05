@@ -1,5 +1,4 @@
 import * as archiver from 'archiver';
-import * as crypto from 'crypto';
 import * as fs from 'fs-extra';
 import * as glob from 'glob';
 import * as path from 'path';
@@ -40,8 +39,4 @@ export function zipDirectory(directory: string, outputFile: string): Promise<voi
     // archive has been finalized and the output file descriptor has closed, resolve promise
     output.once('close', ok);
   });
-}
-
-export function contentHash(data: string | Buffer | DataView) {
-  return crypto.createHash('sha256').update(data).digest('hex');
 }

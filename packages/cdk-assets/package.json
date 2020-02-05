@@ -1,7 +1,7 @@
 {
   "name": "cdk-assets",
   "description": "CDK Asset Publishing Tool",
-  "version": "1.20.0",
+  "version": "1.22.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "bin": {
@@ -36,13 +36,13 @@
     "@types/mock-fs": "^4.10.0",
     "@types/winston": "^2.4.4",
     "@types/yargs": "^15.0.0",
-    "cdk-build-tools": "1.20.0",
+    "cdk-build-tools": "1.22.0",
     "jest": "^24.9.0",
     "mock-fs": "^4.10.4",
-    "pkglint": "1.20.0"
+    "pkglint": "1.22.0"
   },
   "dependencies": {
-    "@aws-cdk/cx-api": "1.20.0",
+    "@aws-cdk/cx-api": "1.22.0",
     "archiver": "^3.1.1",
     "aws-sdk": "^2.601.0",
     "fs-extra": "^8.1.0",
@@ -63,7 +63,7 @@
   "engines": {
     "node": ">= 10.3.0"
   },
-  "stability": "stable",
+  "stability": "experimental",
   "jest": {
     "moduleFileExtensions": [
       "js"

@@ -32,49 +32,22 @@
     "@types/fs-extra": "^8.0.1",
     "@types/glob": "^7.1.1",
     "@types/jest": "^24.0.25",
-    "@types/jszip": "^3.1.7",
-    "@types/minimatch": "^3.0.3",
-    "@types/mockery": "^1.4.29",
     "@types/node": "^10.17.13",
-    "@types/promptly": "^3.0.0",
-    "@types/request": "^2.48.4",
-    "@types/semver": "^6.2.0",
-    "@types/sinon": "^7.5.0",
-    "@types/table": "^4.0.7",
-    "@types/uuid": "^3.4.6",
     "@types/mock-fs": "^4.10.0",
     "@types/winston": "^2.4.4",
-    "@types/yaml": "^1.2.0",
     "@types/yargs": "^15.0.0",
-    "aws-sdk-mock": "^5.0.0",
     "cdk-build-tools": "1.20.0",
     "jest": "^24.9.0",
-    "jszip": "^3.2.2",
     "mock-fs": "^4.10.4",
-    "mockery": "^2.1.0",
-    "pkglint": "1.20.0",
-    "sinon": "^8.0.2",
-    "ts-jest": "^24.2.0"
+    "pkglint": "1.20.0"
   },
   "dependencies": {
     "@aws-cdk/cx-api": "1.20.0",
     "archiver": "^3.1.1",
     "aws-sdk": "^2.601.0",
-    "camelcase": "^5.3.1",
-    "colors": "^1.4.0",
-    "decamelize": "^3.2.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
-    "json-diff": "^0.5.4",
-    "minimatch": ">=3.0",
-    "promptly": "^3.0.3",
-    "request": "^2.88.0",
-    "semver": "^7.1.1",
-    "source-map-support": "^0.5.16",
-    "table": "^5.4.6",
-    "uuid": "^3.3.3",
     "winston": "^3.2.1",
-    "yaml": "^1.7.2",
     "yargs": "^15.0.2"
   },
   "repository": {
@@ -107,7 +80,5 @@
       "html",
       "text-summary"
     ]
-  },
-  "peerDependencies": {
   }
 }

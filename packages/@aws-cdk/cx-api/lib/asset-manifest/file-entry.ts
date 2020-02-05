@@ -1,6 +1,6 @@
-import { AssetIdentifier, ManifestEntry } from "@aws-cdk/assets";
+import { AssetIdentifier, ManifestEntry } from './asset-manifest';
 
-const FILE_ASSET_TYPE = 'file';
+export const FILE_ASSET_TYPE = 'file';
 
 /**
  * Packaging strategy for file assets
@@ -40,30 +40,6 @@ export interface ManifestFileEntry {
    * Destination for the file asset
    */
   readonly destination: FileDestination;
-}
-
-/**
- * Static class so that this is accessible via JSII
- */
-export class Manifest {
-  /**
-   * Return whether the given manifest entry is for a file asset
-   *
-   * Will throw if the manifest entry is for a file asset but malformed.
-   */
-  public static isFileEntry(entry: ManifestEntry): entry is ManifestFileEntry {
-    if (entry.type !== FILE_ASSET_TYPE) { return false; }
-
-    expectKey(entry.source, 'path', 'string');
-    expectKey(entry.source, 'packaging', 'string', true);
-    expectKey(entry.destination, 'region', 'string', true);
-    expectKey(entry.destination, 'assumeRoleArn', 'string', true);
-    expectKey(entry.destination, 'assumeRoleExternalId', 'string', true);
-    expectKey(entry.destination, 'bucketName', 'string');
-    expectKey(entry.destination, 'objectKey', 'string');
-
-    return true;
-  }
 }
 
 /**
@@ -115,6 +91,28 @@ export interface FileDestination {
    * The destination object key
    */
   readonly objectKey: string;
+}
+
+/**
+ * Return whether the given manifest entry is for a file asset
+ *
+ * Will throw if the manifest entry is for a file asset but malformed.
+ *
+ * @internal Internal so it's only exposed via the StandardManifestEntries class, but the
+ * implementation can live close to the data types it's describing.
+ */
+export function isFileEntry(entry: ManifestEntry): entry is ManifestFileEntry {
+  if (entry.type !== FILE_ASSET_TYPE) { return false; }
+
+  expectKey(entry.source, 'path', 'string');
+  expectKey(entry.source, 'packaging', 'string', true);
+  expectKey(entry.destination, 'region', 'string', true);
+  expectKey(entry.destination, 'assumeRoleArn', 'string', true);
+  expectKey(entry.destination, 'assumeRoleExternalId', 'string', true);
+  expectKey(entry.destination, 'bucketName', 'string');
+  expectKey(entry.destination, 'objectKey', 'string');
+
+  return true;
 }
 
 function expectKey(obj: any, key: string, type: string, optional?: boolean) {

@@ -1,4 +1,4 @@
-import { AssetManifest, ManifestEntry } from "@aws-cdk/assets";
+import { AssetManifest, ManifestEntry } from "@aws-cdk/cx-api";
 import { IAws } from "./aws-operations";
 import { makeAssetHandler } from "./handlers";
 

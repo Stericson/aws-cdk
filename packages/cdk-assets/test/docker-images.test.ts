@@ -1,6 +1,6 @@
 jest.mock('child_process');
 
-import { AssetManifest } from '@aws-cdk/assets';
+import { AssetManifest } from '@aws-cdk/cx-api';
 import * as mockfs from 'mock-fs';
 import { AssetPublishing } from '../lib';
 import { mockAws, mockedApiFailure, mockedApiResult } from './mock-aws';

@@ -1,5 +1,5 @@
 import * as mockfs from 'mock-fs';
-import { AssetIdentifier, AssetManifest } from '../lib';
+import { AssetIdentifier, AssetManifest } from '../../lib';
 
 beforeEach(() => {
   mockfs({

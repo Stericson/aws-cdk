@@ -1,4 +1,4 @@
-import { AssetIdentifier, AssetManifest } from '@aws-cdk/assets';
+import { AssetIdentifier, AssetManifest } from '@aws-cdk/cx-api';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';

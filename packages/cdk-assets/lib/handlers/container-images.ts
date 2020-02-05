@@ -1,4 +1,4 @@
-import { ManifestDockerImageEntry } from "@aws-cdk/aws-ecr-assets";
+import { ManifestDockerImageEntry } from "@aws-cdk/cx-api";
 import * as path from 'path';
 import { IAws } from "../aws-operations";
 import { IAssetHandler, MessageSink } from "../private/asset-handler";

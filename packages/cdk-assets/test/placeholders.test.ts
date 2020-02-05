@@ -1,4 +1,4 @@
-import { AssetManifest } from '@aws-cdk/assets';
+import { AssetManifest } from '@aws-cdk/cx-api';
 import * as mockfs from 'mock-fs';
 import { AssetPublishing } from '../lib';
 import { mockAws, mockedApiResult } from './mock-aws';

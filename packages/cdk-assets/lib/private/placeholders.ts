@@ -1,4 +1,4 @@
-import { AssetManifest } from "@aws-cdk/assets";
+import { AssetManifest } from "@aws-cdk/cx-api";
 import { IAws } from "../aws-operations";
 
 /**

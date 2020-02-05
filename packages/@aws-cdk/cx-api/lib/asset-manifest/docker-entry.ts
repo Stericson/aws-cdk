@@ -1,4 +1,4 @@
-import { AssetIdentifier, ManifestEntry } from "@aws-cdk/assets";
+import { AssetIdentifier, ManifestEntry } from './asset-manifest';
 
 const DOCKER_IMAGE_ASSET_TYPE = 'docker-image';
 
@@ -28,36 +28,34 @@ export interface ManifestDockerImageEntry {
 }
 
 /**
- * Static class so that this is accessible via JSII
+ * Return whether the given manifest entry is for a docker image asset
+ *
+ * Will throw if the manifest entry is for a file asset but malformed.
+ *
+ * @internal Internal so it's only exposed via the StandardManifestEntries class, but the
+ * implementation can live close to the data types it's describing.
  */
-export class Manifest {
-  /**
-   * Return whether the given manifest entry is for a docker image asset
-   *
-   * Will throw if the manifest entry is for a file asset but malformed.
-   */
-  public static isDockerImageEntry(entry: ManifestEntry): entry is ManifestDockerImageEntry {
-    if (entry.type !== DOCKER_IMAGE_ASSET_TYPE) { return false; }
+export function isDockerImageEntry(entry: ManifestEntry): entry is ManifestDockerImageEntry {
+  if (entry.type !== DOCKER_IMAGE_ASSET_TYPE) { return false; }
 
-    expectKey(entry.source, 'directory', 'string');
-    expectKey(entry.source, 'dockerFile', 'string', true);
-    expectKey(entry.source, 'dockerBuildTarget', 'string', true);
-    expectKey(entry.source, 'dockerBuildArgs', 'object', true);
-    for (const value of Object.values(entry.source.dockerBuildArgs || {})) {
-      if (typeof value !== 'string') {
-        throw new Error(`All elements of 'dockerBuildArgs' should be strings, got: '${value}'`);
-      }
+  expectKey(entry.source, 'directory', 'string');
+  expectKey(entry.source, 'dockerFile', 'string', true);
+  expectKey(entry.source, 'dockerBuildTarget', 'string', true);
+  expectKey(entry.source, 'dockerBuildArgs', 'object', true);
+  for (const value of Object.values(entry.source.dockerBuildArgs || {})) {
+    if (typeof value !== 'string') {
+      throw new Error(`All elements of 'dockerBuildArgs' should be strings, got: '${value}'`);
     }
-
-    expectKey(entry.destination, 'region', 'string', true);
-    expectKey(entry.destination, 'assumeRoleArn', 'string', true);
-    expectKey(entry.destination, 'assumeRoleExternalId', 'string', true);
-    expectKey(entry.destination, 'repositoryName', 'string');
-    expectKey(entry.destination, 'imageTag', 'string');
-    expectKey(entry.destination, 'imageUri', 'string');
-
-    return true;
   }
+
+  expectKey(entry.destination, 'region', 'string', true);
+  expectKey(entry.destination, 'assumeRoleArn', 'string', true);
+  expectKey(entry.destination, 'assumeRoleExternalId', 'string', true);
+  expectKey(entry.destination, 'repositoryName', 'string');
+  expectKey(entry.destination, 'imageTag', 'string');
+  expectKey(entry.destination, 'imageUri', 'string');
+
+  return true;
 }
 
 /**

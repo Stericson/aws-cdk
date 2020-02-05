@@ -1,5 +1,5 @@
 // Separate test file since the archiving module doesn't work well with 'mock-fs'
-import { AssetManifest } from '@aws-cdk/assets';
+import { AssetManifest } from '@aws-cdk/cx-api';
 import { AssetPublishing } from '../lib';
 import * as bockfs from './bockfs';
 import { mockAws, mockedApiFailure, mockedApiResult } from './mock-aws';

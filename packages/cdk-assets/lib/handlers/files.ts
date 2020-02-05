@@ -1,4 +1,4 @@
-import { FileAssetPackaging, ManifestFileEntry } from "@aws-cdk/aws-s3-assets";
+import { FileAssetPackaging, ManifestFileEntry } from "@aws-cdk/cx-api";
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { IAws } from "../aws-operations";

@@ -1,16 +1,14 @@
-import { AssetManifest, ManifestEntry } from "@aws-cdk/assets";
-import * as ecrAsset from '@aws-cdk/aws-ecr-assets';
-import * as s3Asset from '@aws-cdk/aws-s3-assets';
+import { AssetManifest, ManifestEntry, StandardManifestEntries } from "@aws-cdk/cx-api";
 import { IAws } from "../aws-operations";
 import { IAssetHandler, MessageSink } from "../private/asset-handler";
 import { ContainerImageAssetHandler } from "./container-images";
 import { FileAssetHandler } from "./files";
 
 export function makeAssetHandler(manifest: AssetManifest, asset: ManifestEntry, aws: IAws, message: MessageSink): IAssetHandler {
-  if (s3Asset.Manifest.isFileEntry(asset)) {
+  if (StandardManifestEntries.isFileEntry(asset)) {
     return new FileAssetHandler(manifest.directory, asset, aws, message);
   }
-  if (ecrAsset.Manifest.isDockerImageEntry(asset)) {
+  if (StandardManifestEntries.isDockerImageEntry(asset)) {
     return new ContainerImageAssetHandler(manifest.directory, asset, aws, message);
   }
 
